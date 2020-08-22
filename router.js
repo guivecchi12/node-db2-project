@@ -25,9 +25,9 @@ router.get("/cars/:id", async (req, res, next) => {
 
 router.post("/cars", async (req, res, next) => {
 	try {
-		const [id] = await db.insert(req.body)
+		const [id] = await db.insert(req.body).into("cars")
 		const newCar = await db("cars")
-			.where({ id })
+			.where( "VIN", id )
 			.first()
 
 		res.status(201).json(newCar)
